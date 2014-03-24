@@ -71,6 +71,7 @@
   <div id="tetris">
     <div id="menu">
       <p id="start"><a href="javascript:play();">Press Space to Play.</a></p>
+      <p id="glasses-note">Use 3D glasses for dichoptic effect.</p>
       <p><canvas id="upcoming"></canvas></p>
       <p>score <span id="score">00000</span></p>
       <p>rows <span id="rows">0</span></p>
@@ -90,7 +91,7 @@
         <a href="http://www.huffingtonpost.com/2013/04/23/tetris-lazy-eye-adult-amblyopia-_n_3141981.html">may help amblyopia</a>
       </div>
       <div id="credits">
-        <a href="http://github.com/harthur/javascript-tetris">code</a> based on a
+        <a href="http://github.com/harthur/dichoptic-tetris">code</a> based on a
         <a href="http://github.com/wbic16/javascript-tetris">modified</a> version of
         <a href="http://github.com/jakesgordon/javascript-tetris">javascript-tetris</a>
       </div>
@@ -104,6 +105,7 @@
 
     function get(id)        { return document.getElementById(id);  }
     function hide(id)       { get(id).style.visibility = 'hidden'; }
+    function remove(id)     { get(id).style.display = 'none'; }
     function show(id)       { get(id).style.visibility = null;     }
     function html(id, html) { get(id).innerHTML = html;            }
 
@@ -292,7 +294,7 @@
     // GAME LOGIC
     //-------------------------------------------------------------------------
 
-    function play() { hide('start'); reset();          playing = true;  }
+    function play() { hide('start'); remove('glasses-note'); reset(); playing = true;  }
     function lose() { show('start'); setVisualScore(); playing = false; }
 
     function setVisualScore(n)      { vscore = n || score; invalidateScore(); }
