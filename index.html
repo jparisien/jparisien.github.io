@@ -16,6 +16,9 @@
     #rows     { color: blue; font-weight: bold; vertical-align: middle; }
     #stats    { position: absolute; bottom: 0em; right: 1em; }
     #flip-button { display: inline-block;
+       position: absolute;
+       bottom: 0px;
+       left: 0.8em;
        font-size: 80%;
        cursor: pointer;
        padding: 0.2em;
@@ -23,8 +26,6 @@
        border-radius: 2px;
        background-color: #EEE;
        color: #333;
-       float: left;
-       margin-top: -32px;
     }
     #flip-button:hover,
     #flip-button:active {
@@ -73,14 +74,14 @@
       <p><canvas id="upcoming"></canvas></p>
       <p>score <span id="score">00000</span></p>
       <p>rows <span id="rows">0</span></p>
+
+      <div id="flip-button">
+        <a>Flip Colors ⇄</a>
+      </div>
     </div>
     <canvas id="canvas">
       Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
     </canvas>
-
-    <div id="flip-button">
-      <a>Flip Colors ⇄</a>
-    </div>
   </div>
   <footer>
     <div id="info-box">
