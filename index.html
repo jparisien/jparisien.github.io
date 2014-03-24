@@ -6,7 +6,7 @@
     body      { font-family: Helvetica, sans-serif; }
     #tetris   { margin: 1em auto; padding: 1em; border: 4px solid black; border-radius: 10px; background-color: #F8F8F8; }
     #stats    { display: inline-block; vertical-align: top; }
-    #canvas   { display: inline-block; vertical-align: top; background: #ed002f; box-shadow: 10px 10px 10px #999; border: 2px solid #333; }
+    #canvas   { display: inline-block; vertical-align: top; background: #f00; box-shadow: 10px 10px 10px #999; border: 2px solid #333; }
     #menu     { display: inline-block; vertical-align: top; position: relative; }
     #menu p   { margin: 0.5em 0; text-align: center; }
     #menu p a { text-decoration: none; color: black; }
@@ -111,7 +111,7 @@
     //-------------------------------------------------------------------------
 
     var invisibleLeft = "#330033";
-    var invisibleRight = "#00c12b";
+    var invisibleRight = "#fcc";
 
     var i = { id: 'i', size: 4, blocks: [0x0F00, 0x2222, 0x00F0, 0x4444], color: invisibleLeft, color2: invisibleRight };
     var j = { id: 'j', size: 3, blocks: [0x44C0, 0x8E00, 0x6440, 0x0E20], color: invisibleLeft, color2: invisibleRight };
@@ -432,6 +432,7 @@
     function drawBlock(ctx, x, y, color) {
       ctx.fillStyle = color;
       ctx.fillRect(x*dx, y*dy, dx, dy);
+      ctx.strokeStyle = color;
       ctx.strokeRect(x*dx, y*dy, dx, dy)
     }
 
