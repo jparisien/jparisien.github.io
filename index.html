@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html>
 <head>
-  <title>Javascript Tetris</title>
+  <title>Red/Blue Dichoptical Tetris</title>
   <meta charset="utf-8">
   <style>
     body      { font-family: Helvetica, sans-serif; }
@@ -32,13 +32,34 @@
     #flip-button:active {
       box-shadow: 0px 0px 1px 1px #888;
     }
+    footer {
+      color: #333;
+      font-size: 80%;
+    }
+    footer a {
+      color: inherit;
+    }
+    #info-box {
+      display: block;
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      padding: 0px 10px 10px 0px;
+      text-align: right;
+      line-height: 1.4em;
+      letter-spacing: 0.1px;
+    }
+    #credits {
+      color: #555;
+    }
+
     @media screen and (min-width:   0px) and (min-height:   0px)  { #tetris { font-size: 0.75em; width: 250px; } #menu { width: 100px; height: 200px; } #upcoming { width:  50px; height:  50px; } #canvas { width: 100px; height: 200px; } } /* 10px chunks */
-    @media screen and (min-width: 400px) and (min-height: 400px)  { #tetris { font-size: 1.00em; width: 350px; } #menu { width: 150px; height: 300px; } #upcoming { width:  75px; height:  75px; } #canvas { width: 150px; height: 300px; } } /* 15px chunks */
-    @media screen and (min-width: 500px) and (min-height: 500px)  { #tetris { font-size: 1.25em; width: 450px; } #menu { width: 200px; height: 400px; } #upcoming { width: 100px; height: 100px; } #canvas { width: 200px; height: 400px; } } /* 20px chunks */
-    @media screen and (min-width: 600px) and (min-height: 600px)  { #tetris { font-size: 1.50em; width: 550px; } #menu { width: 250px; height: 500px; } #upcoming { width: 125px; height: 125px; } #canvas { width: 250px; height: 500px; } } /* 25px chunks */
-    @media screen and (min-width: 700px) and (min-height: 700px)  { #tetris { font-size: 1.75em; width: 650px; } #menu { width: 300px; height: 600px; } #upcoming { width: 150px; height: 150px; } #canvas { width: 300px; height: 600px; } } /* 30px chunks */
-    @media screen and (min-width: 800px) and (min-height: 800px)  { #tetris { font-size: 2.00em; width: 750px; } #menu { width: 350px; height: 700px; } #upcoming { width: 175px; height: 175px; } #canvas { width: 350px; height: 700px; } } /* 35px chunks */
-    @media screen and (min-width: 900px) and (min-height: 900px)  { #tetris { font-size: 2.25em; width: 850px; } #menu { width: 400px; height: 800px; } #upcoming { width: 200px; height: 200px; } #canvas { width: 400px; height: 800px; } } /* 40px chunks */
+    @media screen and (min-width: 400px) and (min-height: 400px)  { #tetris { font-size: 1.00em; width: 350px; } #menu { width: 150px; height: 280px; } #upcoming { width:  75px; height:  75px; } #canvas { width: 150px; height: 280px; } } /* 15px chunks */
+    @media screen and (min-width: 500px) and (min-height: 500px)  { #tetris { font-size: 1.25em; width: 450px; } #menu { width: 200px; height: 380px; } #upcoming { width: 100px; height: 100px; } #canvas { width: 200px; height: 380px; } } /* 20px chunks */
+    @media screen and (min-width: 600px) and (min-height: 600px)  { #tetris { font-size: 1.50em; width: 550px; } #menu { width: 250px; height: 480px; } #upcoming { width: 125px; height: 125px; } #canvas { width: 250px; height: 480px; } } /* 25px chunks */
+    @media screen and (min-width: 700px) and (min-height: 700px)  { #tetris { font-size: 1.75em; width: 650px; } #menu { width: 300px; height: 580px; } #upcoming { width: 150px; height: 150px; } #canvas { width: 300px; height: 580px; } } /* 30px chunks */
+    @media screen and (min-width: 800px) and (min-height: 800px)  { #tetris { font-size: 2.00em; width: 750px; } #menu { width: 350px; height: 680px; } #upcoming { width: 175px; height: 175px; } #canvas { width: 350px; height: 680px; } } /* 35px chunks */
+    @media screen and (min-width: 900px) and (min-height: 900px)  { #tetris { font-size: 2.25em; width: 850px; } #menu { width: 400px; height: 780px; } #upcoming { width: 200px; height: 200px; } #canvas { width: 400px; height: 780px; } } /* 40px chunks */
   </style>
 </head> 
 
@@ -58,11 +79,20 @@
     <div id="flip-button">
       <a>Flip Colors ⇄</a>
     </div>
-    <footer>
-
-    </footer>
   </div>
-
+  <footer>
+    <div id="info-box">
+      <div id="info">
+        👀 Playing this with red/blue 3D glasses
+        <a href="http://www.huffingtonpost.com/2013/04/23/tetris-lazy-eye-adult-amblyopia-_n_3141981.html">may help amblyopia</a> (lazy eye)
+      </div>
+      <div id="credits">
+        <a href="http://github.com/harthur/javascript-tetris">code</a> based on a
+        <a href="http://github.com/wbic16/javascript-tetris">modified</a> version of
+        <a href="http://github.com/jakesgordon/javascript-tetris">javascript-tetris</a>
+      </div>
+    </div>
+  </footer>
   <script>
 
     //-------------------------------------------------------------------------
