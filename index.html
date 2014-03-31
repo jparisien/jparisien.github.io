@@ -71,7 +71,7 @@
   <div id="tetris">
     <div id="menu">
       <p id="start"><a href="javascript:play();">Press Space to Play.</a></p>
-      <p id="glasses-note">Use 3D glasses for dichoptic effect.</p>
+      <p id="glasses-note">Use red/blue 3D glasses for <a href="http://en.wikipedia.org/wiki/Dichoptic_presentation">dichoptic</a> effect.</p>
       <p><canvas id="upcoming"></canvas></p>
       <p>score <span id="score">00000</span></p>
       <p>rows <span id="rows">0</span></p>
@@ -87,7 +87,7 @@
   <footer>
     <div id="info-box">
       <div id="info">
-        👀 Playing this with red/blue 3D glasses
+        👀 Studies show that dichoptic tetris
         <a href="http://www.huffingtonpost.com/2013/04/23/tetris-lazy-eye-adult-amblyopia-_n_3141981.html">may help amblyopia</a>
       </div>
       <div id="credits">
@@ -171,8 +171,8 @@
     //-------------------------------------------------------------------------
 
     var blockColors = {
-      set: "hsl(0, 39%, 85%)",
-      falling: "hsl(300, 21%, 32%)"
+      set: "hsl(0, 62%, 71%)",
+      falling: "hsl(300, 14%, 26%)"
     };
 
     var types = [
