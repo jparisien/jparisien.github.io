@@ -9,7 +9,7 @@
     #stats    { display: inline-block; vertical-align: top; }
     #canvas   { display: inline-block; vertical-align: top; background: hsl(0, 79%, 57%); box-shadow: 10px 10px 10px #999; border: 2px solid #333; }
     #menu     { display: inline-block; vertical-align: top; position: relative; }
-    #menu p   { margin: 0.5em 0; text-align: center; }
+    #menu p   { margin: 0.5em 0;}
     #menu p a { text-decoration: none; color: black; }
     #upcoming { display: block; margin: 0 auto; background-color: #EEE; }
     #score    { color: red; font-weight: bold; vertical-align: middle; }
@@ -71,7 +71,7 @@
   <div id="tetris">
     <div id="menu">
       <p id="start"><a href="javascript:play();">Press Space to Play.</a></p>
-      <p id="glasses-note">Use red/blue 3D glasses for <a href="http://en.wikipedia.org/wiki/Dichoptic_presentation">dichoptic</a> effect.</p>
+      <p id="glasses-note">Use red/blue 3D glasses for <a href="http://en.wikipedia.org/wiki/Dichoptic_presentation">dichoptic</a> effect -- one eye sees falling piece, the other sees ground pieces.</p>
       <p><canvas id="upcoming"></canvas></p>
       <p>score <span id="score">00000</span></p>
       <p>rows <span id="rows">0</span></p>
@@ -87,7 +87,7 @@
   <footer>
     <div id="info-box">
       <div id="info">
-        👀 Studies show that dichoptic tetris
+        👀 <a href="http://www.jove.com/video/3927/the-measurement-and-treatment-of-suppression-in-amblyopia">Preliminary studies</a> show that dichoptic tetris
         <a href="http://www.huffingtonpost.com/2013/04/23/tetris-lazy-eye-adult-amblyopia-_n_3141981.html">may help amblyopia</a>
       </div>
       <div id="credits">
