@@ -254,6 +254,7 @@
     }
 
     function addEvents() {
+      document.addEventListener('click', click, false);
       document.addEventListener('keydown', keydown, false);
       window.addEventListener('resize', resize, false);
 
@@ -288,6 +289,18 @@
       }
       if (handled)
         ev.preventDefault(); // prevent arrow keys from scrolling the page (supported in IE9+ and all other browsers)
+    }
+    
+    function click(ev) {
+      var handled = false;
+      if (playing) {
+        actions.push(DIR.UP);
+      } else {
+        play();
+      }
+
+      ev.preventDefault();
+
     }
 
     //-------------------------------------------------------------------------
