@@ -1,26 +1,68 @@
 <!DOCTYPE html> 
 <html>
 <head>
-  <title>Javascript Tetris</title>
+  <title>Red/Blue Dichoptic Tetris</title>
+  <meta charset="utf-8">
   <style>
     body      { font-family: Helvetica, sans-serif; }
     #tetris   { margin: 1em auto; padding: 1em; border: 4px solid black; border-radius: 10px; background-color: #F8F8F8; }
     #stats    { display: inline-block; vertical-align: top; }
-    #canvas   { display: inline-block; vertical-align: top; background: #f00; box-shadow: 10px 10px 10px #999; border: 2px solid #333; }
+    #canvas   { display: inline-block; vertical-align: top; background: hsl(0, 79%, 57%); box-shadow: 10px 10px 10px #999; border: 2px solid #333; }
     #menu     { display: inline-block; vertical-align: top; position: relative; }
-    #menu p   { margin: 0.5em 0; text-align: center; }
+    #menu p   { margin: 0.5em 0;}
     #menu p a { text-decoration: none; color: black; }
-    #upcoming { display: block; margin: 0 auto; background-color: #E0E0E0; }
-    #score    { color: red; font-weight: bold; vertical-align: middle; }
-    #rows     { color: blue; font-weight: bold; vertical-align: middle; }
+    #upcoming { display: block; margin: 0 auto; background-color: #EEE; }
+    #score    { color: rgb(2, 239, 247); font-weight: bold; vertical-align: middle; }
+    #rows     { color: rgb(2, 239, 247); font-weight: bold; vertical-align: middle; }
     #stats    { position: absolute; bottom: 0em; right: 1em; }
+    #flip-button { display: inline-block;
+       position: absolute;
+       bottom: 0px;
+       left: 0.8em;
+       font-size: 80%;
+       cursor: pointer;
+       padding: 0.2em;
+       border: 1px solid #CCC;
+       border-radius: 2px;
+       background-color: #EEE;
+       color: #333;
+    }
+    #flip-button:hover,
+    #flip-button:active {
+      background-color: #DDD;
+      color: black;
+    }
+    #flip-button:active {
+      box-shadow: 0px 0px 1px 1px #888;
+    }
+    footer {
+      color: #333;
+      font-size: 80%;
+    }
+    footer a {
+      color: inherit;
+    }
+    #info-box {
+      display: block;
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      padding: 0px 10px 10px 0px;
+      text-align: right;
+      line-height: 1.5em;
+      letter-spacing: 0.1px;
+    }
+    #credits {
+      color: #555;
+    }
+
     @media screen and (min-width:   0px) and (min-height:   0px)  { #tetris { font-size: 0.75em; width: 250px; } #menu { width: 100px; height: 200px; } #upcoming { width:  50px; height:  50px; } #canvas { width: 100px; height: 200px; } } /* 10px chunks */
-    @media screen and (min-width: 400px) and (min-height: 400px)  { #tetris { font-size: 1.00em; width: 350px; } #menu { width: 150px; height: 300px; } #upcoming { width:  75px; height:  75px; } #canvas { width: 150px; height: 300px; } } /* 15px chunks */
-    @media screen and (min-width: 500px) and (min-height: 500px)  { #tetris { font-size: 1.25em; width: 450px; } #menu { width: 200px; height: 400px; } #upcoming { width: 100px; height: 100px; } #canvas { width: 200px; height: 400px; } } /* 20px chunks */
-    @media screen and (min-width: 600px) and (min-height: 600px)  { #tetris { font-size: 1.50em; width: 550px; } #menu { width: 250px; height: 500px; } #upcoming { width: 125px; height: 125px; } #canvas { width: 250px; height: 500px; } } /* 25px chunks */
-    @media screen and (min-width: 700px) and (min-height: 700px)  { #tetris { font-size: 1.75em; width: 650px; } #menu { width: 300px; height: 600px; } #upcoming { width: 150px; height: 150px; } #canvas { width: 300px; height: 600px; } } /* 30px chunks */
-    @media screen and (min-width: 800px) and (min-height: 800px)  { #tetris { font-size: 2.00em; width: 750px; } #menu { width: 350px; height: 700px; } #upcoming { width: 175px; height: 175px; } #canvas { width: 350px; height: 700px; } } /* 35px chunks */
-    @media screen and (min-width: 900px) and (min-height: 900px)  { #tetris { font-size: 2.25em; width: 850px; } #menu { width: 400px; height: 800px; } #upcoming { width: 200px; height: 200px; } #canvas { width: 400px; height: 800px; } } /* 40px chunks */
+    @media screen and (min-width: 400px) and (min-height: 400px)  { #tetris { font-size: 1.00em; width: 350px; } #menu { width: 150px; height: 280px; } #upcoming { width:  75px; height:  75px; } #canvas { width: 150px; height: 280px; } } /* 15px chunks */
+    @media screen and (min-width: 500px) and (min-height: 500px)  { #tetris { font-size: 1.25em; width: 450px; } #menu { width: 200px; height: 380px; } #upcoming { width: 100px; height: 100px; } #canvas { width: 200px; height: 380px; } } /* 20px chunks */
+    @media screen and (min-width: 600px) and (min-height: 600px)  { #tetris { font-size: 1.50em; width: 550px; } #menu { width: 250px; height: 480px; } #upcoming { width: 125px; height: 125px; } #canvas { width: 250px; height: 480px; } } /* 25px chunks */
+    @media screen and (min-width: 700px) and (min-height: 700px)  { #tetris { font-size: 1.75em; width: 650px; } #menu { width: 300px; height: 580px; } #upcoming { width: 150px; height: 150px; } #canvas { width: 300px; height: 580px; } } /* 30px chunks */
+    @media screen and (min-width: 800px) and (min-height: 800px)  { #tetris { font-size: 2.00em; width: 750px; } #menu { width: 350px; height: 680px; } #upcoming { width: 175px; height: 175px; } #canvas { width: 350px; height: 680px; } } /* 35px chunks */
+    @media screen and (min-width: 900px) and (min-height: 900px)  { #tetris { font-size: 2.25em; width: 850px; } #menu { width: 400px; height: 780px; } #upcoming { width: 200px; height: 200px; } #canvas { width: 400px; height: 780px; } } /* 40px chunks */
   </style>
 </head> 
 
@@ -29,15 +71,32 @@
   <div id="tetris">
     <div id="menu">
       <p id="start"><a href="javascript:play();">Press Space to Play.</a></p>
+      <p id="glasses-note">Use red/blue 3D glasses for <a href="http://en.wikipedia.org/wiki/Dichoptic_presentation">dichoptic</a> effect -- one eye sees falling piece, the other sees ground pieces.</p>
       <p><canvas id="upcoming"></canvas></p>
       <p>score <span id="score">00000</span></p>
       <p>rows <span id="rows">0</span></p>
+
+      <div id="flip-button">
+        <a>Flip Colors ⇄</a>
+      </div>
     </div>
     <canvas id="canvas">
       Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
     </canvas>
   </div>
-
+  <footer>
+    <div id="info-box">
+      <div id="info">
+        👀 <a href="http://www.jove.com/video/3927/the-measurement-and-treatment-of-suppression-in-amblyopia">Preliminary studies</a> show that dichoptic tetris
+        <a href="http://www.huffingtonpost.com/2013/04/23/tetris-lazy-eye-adult-amblyopia-_n_3141981.html">may help amblyopia</a>
+      </div>
+      <div id="credits">
+        <a href="http://github.com/harthur/dichoptic-tetris">code</a> based on a
+        <a href="http://github.com/wbic16/javascript-tetris">modified</a> version of
+        <a href="http://github.com/jakesgordon/javascript-tetris">javascript-tetris</a>
+      </div>
+    </div>
+  </footer>
   <script>
 
     //-------------------------------------------------------------------------
@@ -46,6 +105,7 @@
 
     function get(id)        { return document.getElementById(id);  }
     function hide(id)       { get(id).style.visibility = 'hidden'; }
+    function remove(id)     { get(id).style.display = 'none'; }
     function show(id)       { get(id).style.visibility = null;     }
     function html(id, html) { get(id).innerHTML = html;            }
 
@@ -110,16 +170,19 @@
     //
     //-------------------------------------------------------------------------
 
-    var invisibleLeft = "#330033";
-    var invisibleRight = "#fcc";
+    var blockColors = {
+      set: "rgb(239, 169, 169)",
+      falling: "hsl(300, 14%, 26%)"
+    };
 
-    var i = { id: 'i', size: 4, blocks: [0x0F00, 0x2222, 0x00F0, 0x4444], color: invisibleLeft, color2: invisibleRight };
-    var j = { id: 'j', size: 3, blocks: [0x44C0, 0x8E00, 0x6440, 0x0E20], color: invisibleLeft, color2: invisibleRight };
-    var l = { id: 'l', size: 3, blocks: [0x4460, 0x0E80, 0xC440, 0x2E00], color: invisibleLeft, color2: invisibleRight };
-    var o = { id: 'o', size: 2, blocks: [0xCC00, 0xCC00, 0xCC00, 0xCC00], color: invisibleLeft, color2: invisibleRight };
-    var s = { id: 's', size: 3, blocks: [0x06C0, 0x8C40, 0x6C00, 0x4620], color: invisibleLeft, color2: invisibleRight };
-    var t = { id: 't', size: 3, blocks: [0x0E40, 0x4C40, 0x4E00, 0x4640], color: invisibleLeft, color2: invisibleRight };
-    var z = { id: 'z', size: 3, blocks: [0x0C60, 0x4C80, 0xC600, 0x2640], color: invisibleLeft, color2: invisibleRight };
+    var types = [
+    { id: 'i', size: 4, blocks: [0x0F00, 0x2222, 0x00F0, 0x4444]},
+    { id: 'j', size: 3, blocks: [0x44C0, 0x8E00, 0x6440, 0x0E20]},
+    { id: 'l', size: 3, blocks: [0x4460, 0x0E80, 0xC440, 0x2E00]},
+    { id: 'o', size: 2, blocks: [0xCC00, 0xCC00, 0xCC00, 0xCC00]},
+    { id: 's', size: 3, blocks: [0x06C0, 0x8C40, 0x6C00, 0x4620]},
+    { id: 't', size: 3, blocks: [0x0E40, 0x4C40, 0x4E00, 0x4640]},
+    { id: 'z', size: 3, blocks: [0x0C60, 0x4C80, 0xC600, 0x2640]}];
 
     //------------------------------------------------
     // do the bit manipulation and iterate through each
@@ -161,8 +224,8 @@
     var pieces = [];
     function randomPiece() {
       if (pieces.length == 0)
-        pieces = [i,i,i,i,j,j,j,j,l,l,l,l,o,o,o,o,s,s,s,s,t,t,t,t,z,z,z,z];
-      var type = pieces.splice(random(0, pieces.length-1), 1)[0];
+        pieces = [0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6];
+      var type = types[pieces.splice(random(0, pieces.length-1), 1)[0]];
       return { type: type, dir: DIR.UP, x: Math.round(random(0, nx - type.size)), y: 0 }
     }
 
@@ -191,8 +254,11 @@
     }
 
     function addEvents() {
+      document.addEventListener('click', click, false);
       document.addEventListener('keydown', keydown, false);
       window.addEventListener('resize', resize, false);
+
+      get("flip-button").addEventListener('click', flipColors, false);
     }
 
     function resize(event) {
@@ -224,12 +290,24 @@
       if (handled)
         ev.preventDefault(); // prevent arrow keys from scrolling the page (supported in IE9+ and all other browsers)
     }
+    
+    function click(ev) {
+      var handled = false;
+      if (playing) {
+        actions.push(DIR.UP);
+      } else {
+        play();
+      }
+
+      ev.preventDefault();
+
+    }
 
     //-------------------------------------------------------------------------
     // GAME LOGIC
     //-------------------------------------------------------------------------
 
-    function play() { hide('start'); reset();          playing = true;  }
+    function play() { hide('start'); remove('glasses-note'); reset(); playing = true;  }
     function lose() { show('start'); setVisualScore(); playing = false; }
 
     function setVisualScore(n)      { vscore = n || score; invalidateScore(); }
@@ -387,7 +465,7 @@
         for(y = 0 ; y < ny ; y++) {
           for (x = 0 ; x < nx ; x++) {
             if (block = getBlock(x,y))
-              drawBlock(ctx, x, y, block.color);
+              drawBlock(ctx, x, y, blockColors.set);
           }
         }
         ctx.strokeRect(0, 0, nx*dx - 1, ny*dy - 1); // court boundary
@@ -425,7 +503,7 @@
 
     function drawPiece(ctx, type, x, y, dir) {
       eachblock(type, x, y, dir, function(x, y) {
-        drawBlock(ctx, x, y, type.color2);
+        drawBlock(ctx, x, y, blockColors.falling);
       });
     }
 
@@ -434,6 +512,13 @@
       ctx.fillRect(x*dx, y*dy, dx, dy);
       ctx.strokeStyle = color;
       ctx.strokeRect(x*dx, y*dy, dx, dy)
+    }
+
+    function flipColors() {
+      var setColor = blockColors.set;
+
+      blockColors.set = blockColors.falling;
+      blockColors.falling = setColor;
     }
 
     //-------------------------------------------------------------------------
