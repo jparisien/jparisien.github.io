@@ -152,7 +152,8 @@
         score,         // the current score
         vscore,        // the currently displayed score (it catches up to score in small chunks - like a spinning slot machine)
         rows,          // number of completed rows in the current game
-        step;          // how long before current piece drops by 1 row
+        step,          // how long before current piece drops by 1 row
+        tx;            // initial touch x coordinate 
 
     //-------------------------------------------------------------------------
     // tetris pieces
@@ -255,6 +256,8 @@
 
     function addEvents() {
       document.addEventListener('click', click, false);
+      document.addEventListener('touchstart', touchstart, false);
+      document.addEventListener('touchend', touchend, false);
       document.addEventListener('keydown', keydown, false);
       window.addEventListener('resize', resize, false);
 
@@ -300,6 +303,24 @@
       }
 
       ev.preventDefault();
+
+    }
+    
+    function touchstart(ev) {
+      tx = ev.changedTouches[0].pageX;
+      ev.preventDefault();
+    }
+    
+    function touchend(ev) {
+      let d = ev.changedTouches[0].pageX - tx;
+      if (d > 1) {
+        actions.push(DIR.RIGHT);
+        ev.preventDefault();
+      } else if (d < -1) {
+        actions.push(DIR.LEFT);
+        ev.preventDefault();
+      }
+      
 
     }
 
